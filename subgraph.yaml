@@ -1,0 +1,26 @@
+specVersion: 0.0.4
+description: IBGT
+repository: https://github.com/bartio-berachain/ibgt-subgraph
+schema:
+  file: ./schema.graphql
+dataSources:
+  - kind: ethereum/contract
+    name: IBGT
+    network: berachain-bartio
+    source:
+      address: "0xbda130737bdd9618301681329bf2e46a016ff9ad"
+      abi: IBGT
+      # startBlock: 6000
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.6
+      language: wasm/assemblyscript
+      entities:
+        - QueueBoost
+      abis:
+        - name: IBGT
+          file: ./abis/IBGT.json
+      eventHandlers:
+        - event: QueueBoost(indexed address,indexed address,uint128)
+          handler: handleQueueBoost
+      file: ./src/mapping.ts
