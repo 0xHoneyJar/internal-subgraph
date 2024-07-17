@@ -1,0 +1,23 @@
+[
+  {
+    "type": "event",
+    "name": "QueueBoost",
+    "inputs": [
+      {
+        "type": "address",
+        "name": "sender",
+        "indexed": true
+      },
+      {
+        "type": "address",
+        "name": "validator",
+        "indexed": true
+      },
+      {
+        "type": "uint128",
+        "name": "amount",
+        "indexed": false
+      }
+    ]
+  }
+]
