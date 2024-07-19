@@ -1,0 +1,214 @@
+specVersion: 0.0.5
+description: Indexer for multiple contracts across networks
+schema:
+  file: ./schema.graphql
+dataSources:
+  - kind: ethereum/contract
+    name: UniswapV3Pool
+    network: berachain-bartio
+    source:
+      address: "0x8a960A6e5f224D0a88BaD10463bDAD161b68C144"
+      abi: UniswapV3Pool
+      startBlock: 746193
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      entities:
+        - Swap
+      abis:
+        - name: UniswapV3Pool
+          file: ./abis/uniswap.json
+      eventHandlers:
+        - event: Swap(indexed address,indexed address,int256,int256,uint160,uint128,int24)
+          handler: handleSwap
+      file: ./src/mapping.ts
+
+  - kind: ethereum/contract
+    name: Ticket
+    network: berachain-bartio
+    source:
+      address: "0xBd10c70e94aCA5c0b9Eb434A62f2D8444Ec0649D"
+      abi: ERC721
+      startBlock: 607983
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      entities:
+        - Transfer
+      abis:
+        - name: ERC721
+          file: ./abis/erc721.json
+      eventHandlers:
+        - event: Transfer(indexed address,indexed address,indexed uint256)
+          handler: handleTransfer
+      file: ./src/mapping.ts
+
+  - kind: ethereum/contract
+    name: THJ101Guide
+    network: optimism
+    source:
+      address: "0x9bc2C48189Ff3865875E4A85AfEb6d6ba848739B"
+      abi: ERC721
+      startBlock: 120304396
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      entities:
+        - Transfer
+      abis:
+        - name: ERC721
+          file: ./abis/erc721.json
+      eventHandlers:
+        - event: Transfer(indexed address,indexed address,indexed uint256)
+          handler: handleTransfer
+      file: ./src/mapping.ts
+
+  - kind: ethereum/contract
+    name: Success
+    network: base
+    source:
+      address: "0x6cfb9280767a3596ee6af887d900014a755ffc75"
+      abi: ERC1155
+      startBlock: 15005617
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      entities:
+        - TransferSingle
+      abis:
+        - name: ERC1155
+          file: ./abis/erc1155.json
+      eventHandlers:
+        - event: TransferSingle(indexed address,indexed address,indexed address,uint256,uint256)
+          handler: handleTransferSingle
+      file: ./src/mapping.ts
+
+  - kind: ethereum/contract
+    name: Eggs
+    network: base
+    source:
+      address: "0x30b8c95a6e7170a1322453b47722f10fea185b0f"
+      abi: ERC1155
+      startBlock: 16798306
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      entities:
+        - TransferSingle
+      abis:
+        - name: ERC1155
+          file: ./abis/erc1155.json
+      eventHandlers:
+        - event: TransferSingle(indexed address,indexed address,indexed address,uint256,uint256)
+          handler: handleTransferSingle
+      file: ./src/mapping.ts
+
+  - kind: ethereum/contract
+    name: Henlo
+    network: base
+    source:
+      address: "0x6cfb9280767a3596ee6af887d900014a755ffc75"
+      abi: ERC1155
+      startBlock: 15005617
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      entities:
+        - TransferSingle
+      abis:
+        - name: ERC1155
+          file: ./abis/erc1155.json
+      eventHandlers:
+        - event: TransferSingle(indexed address,indexed address,indexed address,uint256,uint256)
+          handler: handleTransferSingle
+      file: ./src/mapping.ts
+
+  - kind: ethereum/contract
+    name: Bullas
+    network: base
+    source:
+      address: "0x98F6b7Db312dD276b9a7bD08e3937e68e662202C"
+      abi: ERC1155
+      startBlock: 15898404
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      entities:
+        - TransferSingle
+      abis:
+        - name: ERC1155
+          file: ./abis/erc1155.json
+      eventHandlers:
+        - event: TransferSingle(indexed address,indexed address,indexed address,uint256,uint256)
+          handler: handleTransferSingle
+      file: ./src/mapping.ts
+
+  - kind: ethereum/contract
+    name: Seaport
+    network: base
+    source:
+      address: "0x0000000000000068F116a894984e2DB1123eB395"
+      abi: Seaport
+      startBlock: 15005617
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      entities:
+        - OrderFulfilled
+      abis:
+        - name: Seaport
+          file: ./abis/seaport.json
+      eventHandlers:
+        - event: OrderFulfilled(bytes32,indexed address,indexed address,address,(uint8,address,uint256,uint256)[],(uint8,address,uint256,uint256,address)[])
+          handler: handleOrderFulfilled
+      file: ./src/mapping.ts
+
+  - kind: ethereum/contract
+    name: BoogaBears
+    network: arbitrum
+    source:
+      address: "0x6Ba79f573EdFE305e7Dbd79902BC69436e197834"
+      abi: BoogaBears
+      startBlock: 220862709
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      entities:
+        - TokensMinted
+      abis:
+        - name: BoogaBears
+          file: ./abis/boogaBears.json
+      eventHandlers:
+        - event: TokensMinted(indexed address,uint256,uint256)
+          handler: handleTokensMinted
+      file: ./src/mapping.ts
+
+  - kind: ethereum/contract
+    name: Hooked
+    network: base
+    source:
+      address: "0x672a1ad989fae860d58202a65b78306793a8c0c9"
+      abi: ERC1155
+      startBlock: 17031364
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      entities:
+        - TransferSingle
+      abis:
+        - name: ERC1155
+          file: ./abis/erc1155.json
+      eventHandlers:
+        - event: TransferSingle(indexed address,indexed address,indexed address,uint256,uint256)
+          handler: handleTransferSingle
+      file: ./src/mapping.ts
